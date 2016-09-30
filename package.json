@@ -1,0 +1,30 @@
+{
+  "name": "webpack-atelier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --hot --inline",
+    "start-prod": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.prod.js --hot --inline"
+  },
+  "author": "Ludovic Lafole",
+  "license": "MIT",
+  "dependencies": {
+    "awesome-typescript-loader": "1.1.1",
+    "css-loader": "0.25.0",
+    "html-loader": "0.4.4",
+    "html-webpack-plugin": "2.22.0",
+    "postcss": "5.2.2",
+    "postcss-cssnext": "2.8.0",
+    "postcss-loader": "0.13.0",
+    "reveal": "0.0.4",
+    "style-loader": "^0.13.1",
+    "template-string-loader": "0.0.3",
+    "webpack": "1.13.2",
+    "webpack-dev-server": "1.16.1"
+  },
+  "devDependencies": {
+    "typescript": "1.8.10"
+  }
+}

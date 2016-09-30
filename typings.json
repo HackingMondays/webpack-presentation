@@ -1,0 +1,9 @@
+{
+  "globalDependencies": {
+    "reveal": "registry:dt/reveal#3.3.0+20160920230054",
+    "webpack-env": "registry:dt/webpack-env#1.12.2+20160316155526"
+  },
+  "dependencies": {
+    "webpack": "registry:npm/webpack#1.12.9+20160418172948"
+  }
+}
