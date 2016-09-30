@@ -29,7 +29,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlPlugin(),
+        new HtmlPlugin({
+            name: 'index.html',
+            template: './src/index.ejs'
+        }),
         new webpack.DefinePlugin({
             'PROD': JSON.stringify(false)
         }),
