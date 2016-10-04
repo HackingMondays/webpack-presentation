@@ -1,0 +1,8 @@
+<h2>Loaders</h2>
+<p>Un loader est une fonction appliqué lors du packaging</p>
+<pre><code class="javascript">
+module.exports = function(content) {
+    // remove one line comments
+    return content.replace(/\/\/.*$/, '');
+};
+</code></pre>

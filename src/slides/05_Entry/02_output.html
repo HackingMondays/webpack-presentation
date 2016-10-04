@@ -1,0 +1,28 @@
+<h2>Sortie</h2>
+<pre><code class="javascript">
+    // Peut être vide.
+
+    // Simple
+    output: {
+        filename: "[name].js"
+    }
+
+    // With hash
+    output: {
+        filename: "[name]_[hash].js"
+    }
+
+    // préciser le dossier de build
+    output: {
+        path: __dirname + "/dist",
+        filename: "[name]_[hash].js"
+    }
+
+    // préciser l'emplacement sur le serveur
+    output: {
+        path: __dirname + "/dist",
+        publicPath: '/assets/'
+        filename: "[name]_[hash].js"
+    }
+
+</code></pre>

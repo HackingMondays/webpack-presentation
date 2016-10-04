@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webpack</title>
+</head>
+<body>
+    
+    <section class="reveal">
+        <section class="slides">
+            <section><section><h1>Webpack</h1>
+<h2>Hacking Mondays</h2></section><section><h2>Pourquoi ?</h2>
+<p>Ne peut plus s'en passer !</p></section><section><h2>Et pourtant...</h2>
+<ul>
+    <li>Doc un peu faible sur certaines parties</li>
+    <li>Premier project bootstrapé en plusieurs jours</li>
+</ul></section></section><section><section><h2>Webpack, c'est quoi ?</h2>
+<p>Il permet de générer un livrable pour votre site/application, à partir de l'arbre de dépendance de votre projet.</p>
+<p>En gros ça va générer un gros fichier JS avec tout dedans.</p></section><section><h2>Qu'est-ce que WebPack apporte ?</h2>
+<ul>
+    <li>Une meilleur maitrise du code sur de gros projets</li>
+    <li>Tout devient modules (CSS, images, fonts, ...)</li>
+    <li>Maitrise du temps de chargements initial</li>
+    <li>Maitrise très précise des étapes de génération du projet</li>
+    <li>Automatisation de la génération de ce qui est commun à vos modules</li>
+    <li>Tooling de developpement puissant</li>
+    <li>Supporte tous les systèmes de modules js populaires</li>
+</ul></section></section><section><section><h2>Alternatives</h2>
+<ul>
+    <li>RequireJS</li>
+    <li>Browserify</li>
+    <li>Rollup</li>
+    <li>JSPM</li>
+</ul></section><section><h2>RequireJs</h2>
+<ul>
+    <li>Peu de convention, orienté configuration</li>
+    <li>Pas d'outils pour la phase de développement (server, etc...)</li>
+    <li>Pas de bundle automatique</li>
+    <li>Moins de liberté sur ce qui est un "module"</li>
+</ul></section><section><h2>Broserify</h2>
+<ul>
+    <li>Très semblable à webpack</li>
+    <li>Pas d'outils pendant la phase de developpement (server, ...)</li>
+    <li>Manque du bundle automatique</li>
+</ul></section><section><h2>Rollup</h2>
+<ul>
+    <li>Très semblable à webpack</li>
+    <li>ES2015+(ES6+) spécifique</li>
+    <li>Tree Shaking (optimisation)</li>
+    <li>Plus récents donc moins de plugins</li>
+    <li>Outil de dev un peu moins puissant</li>
+    <li>Moins de possibilités sur l'optimisation du temps de chargement</li>
+</ul></section><section><h2>JSPM</h2>
+<ul>
+    <li>Très semblable à webpack</li>
+    <li>ES2015+(ES6+) spécifique</li>
+    <li>moins de configuration</li>
+    <li>Plus récents donc moins de plugins</li>
+    <li>Moins de liberté sur ce qui est un "module"</li>
+    <li>Moins de possibilités sur l'optimisation du temps de chargement</li>
+</ul></section></section><section><section><h2>Import d'un module</h2>
+<pre><code class="javascript">
+    // ES6 style (avec babel ou typescript)
+    import request from 'request';
+    // ou Node Style
+    var jQuery = require('jquery');
+    // Chargement asynchrone CommonJs style
+    require.ensure(['lodash'], function (require) {
+        var lodash = require('lodash');
+        // Code utilisant lodash
+    })
+    // ou RequireJs style
+    require(['underscore'], function (underscore) {
+        // code utilisant underscore
+    });
+
+</code></pre></section><section><h2>Une configuration simple</h2>
+<pre><code class="javascript">// webpack.config.js
+module.exports = {
+    entry: './src/index.js',
+    module: {
+        loaders: [
+            {
+                test: /\.css$/,
+                loader: 'style!css'
+            }
+        ]
+    }
+};
+</code></pre></section></section><section><section><h2>Point d'entré</h2>
+<pre><code class="javascript">
+    // Un seul fichier
+    {
+        entry: 'src/index.js',
+    }
+
+    // Un seul fichier avec dépendances dans la config
+    {
+        entry: ['bootstrap/dist/css/bootstrap.css', 'src/index.js'],
+    }
+
+    // Multiple fichiers
+    {
+        entry: {
+            home: './src/home.js',
+            app: ['bootstrap/dist/css/bootstrap.css', 'src/index.js']
+        }
+    }
+</code></pre></section><section><h2>Sortie</h2>
+<pre><code class="javascript">
+    // Peut être vide.
+
+    // Simple
+    output: {
+        filename: "[name].js"
+    }
+
+    // With hash
+    output: {
+        filename: "[name]_[hash].js"
+    }
+
+    // préciser le dossier de build
+    output: {
+        path: __dirname + "/dist",
+        filename: "[name]_[hash].js"
+    }
+
+    // préciser l'emplacement sur le serveur
+    output: {
+        path: __dirname + "/dist",
+        publicPath: '/assets/'
+        filename: "[name]_[hash].js"
+    }
+
+</code></pre></section></section><section><section><h2>Loaders</h2>
+<p>Un loader est une fonction appliqué lors du packaging</p>
+<pre><code class="javascript">
+module.exports = function(content) {
+    // remove one line comments
+    return content.replace(/\/\/.*$/, '');
+};
+</code></pre></section><section><h2>Quelques loaders</h2>
+<ul>
+    <li>css, html, style, file, url, json</li>
+    <li>img, svgo</li>
+    <li>postcss, less, sass</li>
+    <li>awesome-typescript, babel</li>
+</ul></section><section><h2>Utilisation des loaders</h2>
+<p>Installation</p>
+<pre><code class="javascript">npm install css-loader --save-dev</code></pre>
+<p>utilisation dans un import</p>
+<pre><code class="javascript">var style = require('css!less!./style.less');</code></pre>
+<p>utilisation dans la configuration</p>
+<pre><code class="javascript">// webpack.config.js
+loaders: [
+    {
+        test: /\.less$/,
+        loader: 'css!less'
+    }
+]
+// index.js
+var style = require('./style.less');</code></pre></section></section><section><section><h2>Plugins</h2>
+<p>Les plugins ont plus de liberté et peuvent se brancher à n'importe quelle étape du packaging.</p>
+<pre><code class="javascript">function MyPlugin(options) {
+  // Configure your plugin with options...
+}
+
+MyPlugin.prototype.apply = function(compiler) {
+  compiler.plugin("compile", function(params) {
+    console.log("The compiler is starting to compile...");
+  });
+
+  compiler.plugin("emit", function(compilation, callback) {
+    console.log("The compilation is going to emit files...");
+    callback();
+  });
+};
+
+module.exports = MyPlugin;</code></pre></section><section><h2>Quelques Plugins</h2>
+<ul>
+    <li>DedupePlugin, OccurrenceOrderPlugin, UglifyJsPlugin</li>
+    <li>CommonsChunkPlugin</li>
+    <li>HtmlWebpackPlugin</li>
+    <li>ExtractTextWebpackPlugin</li>
+    <li>WebpackBrowserPlugin</li>
+</ul></section><section><h2>Une configuration simple</h2>
+<pre><code class="javascript">// webpack.config.js
+var HtmlPlugin = require('html-webpack-plugin');
+module.exports = {
+    entry: './src/index.js',
+    module: {
+        loaders: [
+            {
+                test: /\.css$/,
+                loader: 'style!css'
+            }
+        ]
+    },
+    plugins: [
+        new HtmlPlugin({ title: 'Home Page' })
+    ]
+};
+</code></pre></section></section><section><section><h2>Hot Module Replacement (HMR)</h2>
+<p>Permet de ne mettre à jours seulement ce qui a changé.</p>
+<p>Par exemple, on change la couleur de fond dans le CSS la couleur de fond change sans rechargement de la page.</p></section></section><section><section><h2>Des Questions ?</h2></section></section>
+        </section>
+    </section>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>

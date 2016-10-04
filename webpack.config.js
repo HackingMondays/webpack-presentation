@@ -3,10 +3,15 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: [
-        './src/index.ts',
         'reveal/index.css',
-        'reveal/theme/moon.css'
+        'reveal/theme/moon.css',
+        'highlight/lib/vendor/highlight.js/styles/zenburn.css',
+        './src/index.ts'
     ],
+    output: {
+        filename: 'bundle.js',
+        path: __dirname + '/docs'
+    },
     module: {
         loaders: [
             {
@@ -24,7 +29,7 @@ module.exports = {
             },
             {
                 test: /\.(svg|ttf|eot|woff)$/,
-                loader: "file"
+                loader: "file?name=[name]_[hash].[ext]"
             }
         ]
     },
@@ -39,5 +44,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             'Reveal': 'reveal'
         })
-    ]
+    ],
+    node: {
+        fs: "empty"
+    }
 };

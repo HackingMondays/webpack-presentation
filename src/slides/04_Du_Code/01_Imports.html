@@ -1,0 +1,17 @@
+<h2>Import d'un module</h2>
+<pre><code class="javascript">
+    // ES6 style (avec babel ou typescript)
+    import request from 'request';
+    // ou Node Style
+    var jQuery = require('jquery');
+    // Chargement asynchrone CommonJs style
+    require.ensure(['lodash'], function (require) {
+        var lodash = require('lodash');
+        // Code utilisant lodash
+    })
+    // ou RequireJs style
+    require(['underscore'], function (underscore) {
+        // code utilisant underscore
+    });
+
+</code></pre>

@@ -1,0 +1,20 @@
+<h2>Point d'entré</h2>
+<pre><code class="javascript">
+    // Un seul fichier
+    {
+        entry: 'src/index.js',
+    }
+
+    // Un seul fichier avec dépendances dans la config
+    {
+        entry: ['bootstrap/dist/css/bootstrap.css', 'src/index.js'],
+    }
+
+    // Multiple fichiers
+    {
+        entry: {
+            home: './src/home.js',
+            app: ['bootstrap/dist/css/bootstrap.css', 'src/index.js']
+        }
+    }
+</code></pre>

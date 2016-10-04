@@ -1,0 +1,14 @@
+<h2>Une configuration simple</h2>
+<pre><code class="javascript">// webpack.config.js
+module.exports = {
+    entry: './src/index.js',
+    module: {
+        loaders: [
+            {
+                test: /\.css$/,
+                loader: 'style!css'
+            }
+        ]
+    }
+};
+</code></pre>

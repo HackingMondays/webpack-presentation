@@ -1,0 +1,18 @@
+<h2>Plugins</h2>
+<p>Les plugins ont plus de liberté et peuvent se brancher à n'importe quelle étape du packaging.</p>
+<pre><code class="javascript">function MyPlugin(options) {
+  // Configure your plugin with options...
+}
+
+MyPlugin.prototype.apply = function(compiler) {
+  compiler.plugin("compile", function(params) {
+    console.log("The compiler is starting to compile...");
+  });
+
+  compiler.plugin("emit", function(compilation, callback) {
+    console.log("The compilation is going to emit files...");
+    callback();
+  });
+};
+
+module.exports = MyPlugin;</code></pre>

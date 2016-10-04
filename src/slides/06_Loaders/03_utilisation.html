@@ -1,0 +1,15 @@
+<h2>Utilisation des loaders</h2>
+<p>Installation</p>
+<pre><code class="javascript">npm install css-loader --save-dev</code></pre>
+<p>utilisation dans un import</p>
+<pre><code class="javascript">var style = require('css!less!./style.less');</code></pre>
+<p>utilisation dans la configuration</p>
+<pre><code class="javascript">// webpack.config.js
+loaders: [
+    {
+        test: /\.less$/,
+        loader: 'css!less'
+    }
+]
+// index.js
+var style = require('./style.less');</code></pre>
